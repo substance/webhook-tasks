@@ -3,7 +3,7 @@ set -e
 
 branch=jsdoc
 giturl=https://github.com/substance/substance.git
-remoteurl=https://github.com/substance/docs.git
+remoteurl=git@github.com:substance/docs.git
 source=/tmp/substance
 build=/tmp/substance/dist/doc
 
