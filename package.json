@@ -1,0 +1,11 @@
+{
+    "name": "docsbot",
+    "description": "Substance api documentation generator",
+    "homepage": "http://github.com/substance/docsbot",
+    "version": "0.1.0",
+    "dependencies": {
+        "express": "4.x",
+        "queue-async": "1.0.x"
+    },
+    "private": true
+}
