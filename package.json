@@ -5,7 +5,8 @@
     "version": "0.1.0",
     "dependencies": {
         "express": "4.x",
-        "queue-async": "1.0.x"
+        "queue-async": "1.0.x",
+        "jsdoc": "3.3.3"
     },
     "private": true
 }
