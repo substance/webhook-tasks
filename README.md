@@ -11,4 +11,5 @@ Save the key as `heroku_id_rsa` in the local folder.
 
 3. Run `configure.sh`
 
+4. Set a heroku variable GITHUB_SECRET containing the secret configured in the webhook.
 
