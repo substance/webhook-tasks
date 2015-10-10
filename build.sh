@@ -9,7 +9,7 @@ build=/tmp/substance/dist/doc
 
 # Check to see if repo exists. If not, git clone it
 if [ ! -d $source ]; then
-    git clone $giturl $source
+  git clone $giturl $source
 fi
 
 # Git checkout appropriate branch, pull latest code
@@ -32,3 +32,6 @@ git add .
 git commit -m "$message"
 git push origin gh-pages
 cd -
+
+# successful
+exit 0

@@ -16,25 +16,21 @@ app.post('/hooks/docs', githubMiddleware, function(req, res) {
   if (req.headers['x-github-event'] != 'push') {
     return res.status(200).end();
   }
-  // TODO: we need to react on pushes and PR which merge into master
-  // unfortunately, there is no field in the event payload telling something
-  // about the event type.
   var payload = req.body;
-  console.log("#########################################################");
-  console.log('Received github event:', JSON.stringify(payload, null, 2));
-  console.log("#########################################################");
-
-  var repo = payload.repository.full_name;
+  // console.log("#########################################################");
+  // console.log('Received github event:', JSON.stringify(payload, null, 2));
+  // console.log("#########################################################");
+  // var repo = payload.repository.full_name;
   var branch = payload.ref.split('/').pop();
   // For now we only build pushes to 'master'
-  if (branch === "master") {
+  if (branch === "test") {
     console.log('Updating docs for branch "%s"', branch);
     // Queue request handler
     tasks.defer(function(req, res, cb) {
       // Run build script
       exec("./build.sh", function(err) {
         if (err) {
-          console.log('Failed to build documentation');
+          console.log('Failed to build documentation', err);
           if (typeof cb === 'function') cb();
           return;
         }
@@ -59,6 +55,10 @@ function exec(command, cb) {
     console.warn('' + data);
   });
   process.on('exit', function (code) {
-    if (typeof cb === 'function') cb(code !== 0);
+    var err = null;
+    if (code !== 0) {
+      err = "Build script returned with exit code " + code;
+    }
+    if (typeof cb === 'function') cb(err);
   });
 }
