@@ -6,6 +6,7 @@
     "dependencies": {
         "express": "4.x",
         "queue-async": "1.0.x",
+        "github-webhook-middleware": "0.0.2",
         "jsdoc": "3.3.3"
     },
     "private": true

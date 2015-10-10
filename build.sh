@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-branch=jsdoc
+branch=master
 giturl=https://github.com/substance/substance.git
 remoteurl=git@github.com:substance/docs.git
 source=/tmp/substance
@@ -15,7 +15,8 @@ fi
 # Git checkout appropriate branch, pull latest code
 cd $source
 git checkout $branch
-git pull origin $branch
+git fetch origin $branch
+git reset --hard FETCH_HEAD
 cd -
 
 # Run build script
