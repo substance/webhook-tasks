@@ -9,5 +9,6 @@
         "github-webhook-middleware": "0.0.2",
         "jsdoc": "3.3.3"
     },
+    "main": "./server.js",
     "private": true
 }

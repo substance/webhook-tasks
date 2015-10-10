@@ -1,0 +1,3 @@
+#!/usr/bin/env node
+var buildDocs = require('../src/build_docs');
+buildDocs();
