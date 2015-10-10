@@ -15,3 +15,6 @@ chmod 600 ${HOME}/.ssh/heroku_id_rsa
 
 # Preload the known_hosts file
 ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+
+eval `ssh-agent -s`
+ssh-add ~/.ssh/heroku_id_rsa
