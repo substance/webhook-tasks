@@ -4,7 +4,7 @@ var express = require('express');
 var app     = express();
 var queue   = require('queue-async');
 var tasks   = queue(1);
-var spawn   = require('child_process').spawn;
+var buildDocs = require('./build_docs');
 
 var githubMiddleware = require('github-webhook-middleware')({
   secret: process.env.GITHUB_SECRET
@@ -27,14 +27,7 @@ app.post('/hooks/docs', githubMiddleware, function(req, res) {
     console.log('Updating docs for branch "%s"', branch);
     // Queue request handler
     tasks.defer(function(req, res, cb) {
-      // Run build script
-      exec("./build.sh", function(err) {
-        if (err) {
-          console.log('Failed to build documentation', err);
-          if (typeof cb === 'function') cb();
-          return;
-        }
-      });
+      buildDocs(cb);
     }, req, res);
   }
   // Close connection
@@ -45,20 +38,3 @@ app.post('/hooks/docs', githubMiddleware, function(req, res) {
 var port = process.env.PORT || 5000;
 app.listen(port);
 console.log('Listening on port ' + port);
-
-function exec(command, cb) {
-  var process = spawn(command);
-  process.stdout.on('data', function (data) {
-    console.log('' + data);
-  });
-  process.stderr.on('data', function (data) {
-    console.warn('' + data);
-  });
-  process.on('exit', function (code) {
-    var err = null;
-    if (code !== 0) {
-      err = "Build script returned with exit code " + code;
-    }
-    if (typeof cb === 'function') cb(err);
-  });
-}
