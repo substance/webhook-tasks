@@ -39,7 +39,7 @@ echo "Executing 'npm run doc'..."
 npm run doc
 message=$(git log -1 --pretty=%B)
 echo "Updating docs..."
-rsync -r --delete --cvs-exclude /tmp/substance/dist/ /tmp/docs/
+rsync -r --delete --cvs-exclude /tmp/substance/dist/master/ /tmp/docs/master
 cd -
 
 cd "$docs"
