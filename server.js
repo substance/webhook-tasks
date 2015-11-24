@@ -26,9 +26,9 @@ app.post('/hooks/docs', githubMiddleware, function(req, res) {
   if (branch === "docs-test") {
     console.log('Updating docs for branch "%s"', branch);
     // Queue request handler
-    tasks.defer(function(req, res, cb) {
+    tasks.defer(function(cb) {
       buildDocs(cb);
-    }, req, res);
+    });
   }
   // Close connection
   res.send(202);

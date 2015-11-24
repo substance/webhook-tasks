@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-branch=master
+branch=docs-test
 giturl=https://github.com/substance/substance.git
 remoteurl=git@github.com:substance/docs.git
 source=/tmp/substance
