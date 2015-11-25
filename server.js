@@ -34,7 +34,7 @@ app.post('/hooks/docs', githubMiddleware, function(req, res) {
     console.log('Updating docs for branch "%s"', branch);
     // Queue request handler
     queue.push({}, function (err) {
-      console.log('Documentation was builded');
+      console.log('Documentation has been builded');
     });
   }
   // Close connection
