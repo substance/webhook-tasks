@@ -30,7 +30,7 @@ app.post('/hooks/docs', githubMiddleware, function(req, res) {
   // var repo = payload.repository.full_name;
   var branch = payload.ref.split('/').pop();
   // For now we only build pushes to 'master'
-  if (branch === "docs-test") {
+  if (branch === "master") {
     console.log('Updating docs for branch "%s"', branch);
     // Queue request handler
     queue.push({}, function (err) {
