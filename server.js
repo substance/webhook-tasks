@@ -2,13 +2,20 @@
 
 var express = require('express');
 var app     = express();
-var queue   = require('queue-async');
-var tasks   = queue(1);
+var async   = require('async');
 var buildDocs = require('./src/build_docs');
 
 var githubMiddleware = require('github-webhook-middleware')({
   secret: process.env.GITHUB_SECRET
 });
+
+var queue = async.queue(function (task, cb) {
+  buildDocs(cb);
+});
+
+queue.drain = function() {
+  console.log('All requests have been processed');
+}
 
 // Receive webhook post
 app.post('/hooks/docs', githubMiddleware, function(req, res) {
@@ -26,8 +33,8 @@ app.post('/hooks/docs', githubMiddleware, function(req, res) {
   if (branch === "docs-test") {
     console.log('Updating docs for branch "%s"', branch);
     // Queue request handler
-    tasks.defer(function(cb) {
-      buildDocs(cb);
+    queue.push({}, function (err) {
+      console.log('Documentation was builded');
     });
   }
   // Close connection
