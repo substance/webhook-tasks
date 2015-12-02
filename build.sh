@@ -39,8 +39,8 @@ echo "Executing 'npm run doc'..."
 npm run doc
 message=$(git log -1 --pretty=%B)
 echo "Updating docs..."
-# Place assets contents to /docs
-rsync -r --delete --cvs-exclude /app/assets/ /tmp/docs/
+# Uncomment to place assets contents to /docs
+# rsync -r --delete --cvs-exclude /app/assets/ /tmp/docs/
 # Sync master branch documentation with latest release 
 rsync -r --delete --cvs-exclude /tmp/substance/dist/ /tmp/docs/master
 cd -
